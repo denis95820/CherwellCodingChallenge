@@ -20,6 +20,10 @@ namespace CherwellCodingChallenge.Controllers
 
     public class HomeController : Controller
     {
+        public ActionResult Index()
+        {
+            return View();
+        }
         public ActionResult CalculateTriangleCoordinates(string row, string column)
         {
 
@@ -37,11 +41,6 @@ namespace CherwellCodingChallenge.Controllers
                 
                 //V3x = 10
                 //V3y = 0
-
-                
-
-
-
             }
 
             return View();
@@ -68,14 +67,10 @@ namespace CherwellCodingChallenge.Controllers
 
                 if (c.V1y < c.V2y)
                 {
-                }
-
-                //calculate the horizontal line to get the column
-                if (c.V1x < c.V3x)
-                {
-                    //horisontal line going left to right
+                    string columnNumber = CalculateColumn(c.V1x, c.V3x, true);
                 }
             }
+
             return View();
         }
 
@@ -101,22 +96,59 @@ namespace CherwellCodingChallenge.Controllers
             {
                 return "B";
             }
-            if (y1 == 0 && y2 == 10)
+            if (y1 == 50 && y2 == 60)
             {
                 return "A";
             }
 
             if (tryReversed)
             {
-                //int c = y1;
-                //y1 = y2;
-                //y2 = y1;
-
-                return = CalculateRow(y2, y1, tryReversed = false);  
+                return CalculateRow(y2, y1, tryReversed = false);  
             }
 
             return null;
         }
+
+        private string CalculateColumn(int x1, int x2, bool isRightAngleOnTop, bool tryReversed = true)
+        {
+            int column = 0;
+
+            if ((x1 == 0 && x2 == 10))
+            {
+                column = 1;
+            }
+            if (x1 == 10 && x2 == 20)
+            {
+                column = 3;
+            }
+            if (x1 == 20 && x2 == 30)
+            {
+                column = 5;
+            }
+            if (x1 == 30 && x2 == 40)
+            {
+                column = 7;
+            }
+            if (x1 == 40 && x2 == 50)
+            {
+                column = 9;
+            }
+            if (x1 == 50 && x2 == 60)
+            {
+                column = 11;
+            }
+
+            if (tryReversed)
+            {
+                return CalculateColumn(x2, x1, isRightAngleOnTop, tryReversed = false).ToString();
+            }
+
+            if (isRightAngleOnTop)
+                return (column + 1).ToString();
+
+            return null;
+        }
+
 
         //public ActionResult About()
         //{
