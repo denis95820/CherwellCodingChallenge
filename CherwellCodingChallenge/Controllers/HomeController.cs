@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CherwellCodingChallenge.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,68 +7,175 @@ using System.Web.Mvc;
 
 namespace CherwellCodingChallenge.Controllers
 {
-    public class VertexCoordinates
-    {
-        public int V1x { get; set; }
-        public int V1y { get; set; }
-
-        public int V2x { get; set; }
-        public int V2y { get; set; }
-
-        public int V3x { get; set; }
-        public int V3y { get; set; }
-    }
-
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
+
         public ActionResult CalculateTriangleCoordinates(string row, string column)
         {
+            VertexCoordinates c = new VertexCoordinates();
 
             if (!string.IsNullOrWhiteSpace(row) && !string.IsNullOrWhiteSpace(column))
             {
-                // row = f
-                // column = 1
 
-                //row F starts at (0,0)
-                //V1x = 0
-                //V1y = 0
+                Tuple<int, int> rCoordinates = GetRowCoordinates(row);
+                Tuple<int, int> cCoordinates = GetColumnCoordinates(column);
 
-                //V2x = 0
-                //V2y = 10
-                
-                //V3x = 10
-                //V3y = 0
+                int intColumn = Convert.ToInt32(column);
+
+                if (rCoordinates == null || cCoordinates == null)
+                {
+                    ViewBag.Message = "Error: check inputs";
+                    return View();
+                }
+                if (intColumn % 2 == 0)
+                {
+                    c.V1x = cCoordinates.Item1 > cCoordinates.Item2 ? cCoordinates.Item1 : cCoordinates.Item2;
+                    c.V1y = rCoordinates.Item1 > rCoordinates.Item2 ? rCoordinates.Item1 : rCoordinates.Item2;
+                    c.V2x = cCoordinates.Item1 > cCoordinates.Item2 ? cCoordinates.Item1 : cCoordinates.Item2;
+                    c.V2y = rCoordinates.Item1 < rCoordinates.Item2 ? rCoordinates.Item1 : rCoordinates.Item2;
+                    c.V3x = cCoordinates.Item1 < cCoordinates.Item2 ? cCoordinates.Item1 : cCoordinates.Item2;
+                    c.V3y = rCoordinates.Item1 > rCoordinates.Item2 ? rCoordinates.Item1 : rCoordinates.Item2;
+                }
+                else
+                {
+                    c.V1x = cCoordinates.Item1 < cCoordinates.Item2 ? cCoordinates.Item1 : cCoordinates.Item2;
+                    c.V1y = rCoordinates.Item1 < rCoordinates.Item2 ? rCoordinates.Item1 : rCoordinates.Item2;
+                    c.V2x = cCoordinates.Item1 < cCoordinates.Item2 ? cCoordinates.Item1 : cCoordinates.Item2;
+                    c.V2y = rCoordinates.Item1 > rCoordinates.Item2 ? rCoordinates.Item1 : rCoordinates.Item2;
+                    c.V3x = cCoordinates.Item1 > cCoordinates.Item2 ? cCoordinates.Item1 : cCoordinates.Item2;
+                    c.V3y = rCoordinates.Item1 < rCoordinates.Item2 ? rCoordinates.Item1 : rCoordinates.Item2;
+                }
             }
 
-            return View();
+            return View(c);
+        }
+
+        private Tuple<int, int> GetRowCoordinates(string row)
+        {
+            Tuple<int, int> tuple;
+
+            row = row.ToUpper().Trim();
+
+            if (row.Length < 0)
+                return null;
+
+            switch (row)
+            {
+                case "A":
+                    tuple = new Tuple<int, int>(50, 60);
+                    break;
+                case "B":
+                    tuple = new Tuple<int, int>(40, 50);
+                    break;
+                case "C":
+                    tuple = new Tuple<int, int>(30, 40);
+                    break;
+                case "D":
+                    tuple = new Tuple<int, int>(20, 30);
+                    break;
+                case "E":
+                    tuple = new Tuple<int, int>(10, 20);
+                    break;
+                case "F":
+                    tuple = new Tuple<int, int>(0, 10);
+                    break;
+
+                default:
+                    return null;
+            }
+
+            return tuple;
+        }
+
+        private Tuple<int, int> GetColumnCoordinates(string column)
+        {
+            Tuple<int, int> tuple;
+
+            column = column.ToUpper().Trim();
+
+            if (column.Length < 0)
+                return null;
+
+            switch (column)
+            {
+                case "1":
+                    tuple = new Tuple<int, int>(0, 10);
+                    break;
+                case "2":
+                    tuple = new Tuple<int, int>(0, 10);
+                    break;
+                case "3":
+                    tuple = new Tuple<int, int>(10, 20);
+                    break;
+                case "4":
+                    tuple = new Tuple<int, int>(10, 20);
+                    break;
+                case "5":
+                    tuple = new Tuple<int, int>(20, 30);
+                    break;
+                case "6":
+                    tuple = new Tuple<int, int>(20, 30);
+                    break;
+                case "7":
+                    tuple = new Tuple<int, int>(30, 40);
+                    break;
+                case "8":
+                    tuple = new Tuple<int, int>(30, 40);
+                    break;
+                case "9":
+                    tuple = new Tuple<int, int>(40, 50);
+                    break;
+                case "10":
+                    tuple = new Tuple<int, int>(40, 50);
+                    break;
+                case "11":
+                    tuple = new Tuple<int, int>(50, 60);
+                    break;
+                case "12":
+                    tuple = new Tuple<int, int>(50, 60);
+                    break;
+
+                default:
+                    return null;
+            }
+
+            return tuple;
         }
 
         public ActionResult CalculateRowAndColumn(VertexCoordinates c)
         {
-            // E3 is the triagle
-
-            //V1x = 10
-            //V1y = 10
-            //V1 is right angle 
-
-            //V2x = 10
-            //V2y = 20
-
-            //V3x = 20
-            //V3y = 10
-
-            if (c != null)  // ()
+            if (c != null)
             {
-                //calculate the vertical line to get the row
                 string rowLetter = CalculateRow(c.V1y, c.V2y);
+
+                bool isRightAngleOnTop;
 
                 if (c.V1y < c.V2y)
                 {
-                    string columnNumber = CalculateColumn(c.V1x, c.V3x, true);
+                    isRightAngleOnTop = false;
+                }
+                else
+                {
+                    isRightAngleOnTop = true;
+                }
+
+                string columnNumber = CalculateColumn(c.V1x, c.V3x, isRightAngleOnTop);
+
+                string[] validRows = new string[] { "A", "B", "C", "D", "E", "F" };
+                string[] validColumns = new string[] { "1","2","3","4","5","6","7","8","9","10","11","12" };
+
+                if (!string.IsNullOrEmpty(rowLetter) && !string.IsNullOrEmpty(columnNumber) &&
+                    validRows.Contains(rowLetter) && validColumns.Contains(columnNumber))
+                {
+                    ViewBag.Result = rowLetter + columnNumber;
+                }
+                else
+                {
+                    ViewBag.Result = "Error: check inputs";
                 }
             }
 
@@ -138,15 +246,15 @@ namespace CherwellCodingChallenge.Controllers
                 column = 11;
             }
 
-            if (tryReversed)
+            if (column == 0 && tryReversed)
             {
                 return CalculateColumn(x2, x1, isRightAngleOnTop, tryReversed = false).ToString();
             }
 
-            if (isRightAngleOnTop)
-                return (column + 1).ToString();
+            if (column > 0 && isRightAngleOnTop)
+                column++;
 
-            return null;
+            return column.ToString();
         }
 
 

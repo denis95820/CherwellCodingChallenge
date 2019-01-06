@@ -1,0 +1,66 @@
+﻿@model CherwellCodingChallenge.Models.VertexCoordinates
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>VertexCoordinates</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.V1x)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.V1x)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.V1y)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.V1y)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.V2x)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.V2x)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.V2y)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.V2y)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.V3x)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.V3x)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.V3y)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.V3y)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

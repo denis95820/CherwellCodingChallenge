@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Calculate Row and Column";
+}
+@model CherwellCodingChallenge.Models.VertexCoordinates
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="row">
+@using (Html.BeginForm())
+{
+    <div class="col-md-4">
+
+        <div class="form-horizontal">
+            <h3>Input</h3>
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.V1x, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.V1x)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.V1y, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.V1y)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.V2x, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.V2x)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.V2y, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.V2y)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.V3x, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.V3x)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.V3y, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.V3y)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Calculate" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+    <div class="col-md-4">
+        <h3>Result</h3>
+        <hr />
+                @Html.TextBox("result", (string)@ViewBag.Result, new { @readonly = true })
+    </div>
+</div>
